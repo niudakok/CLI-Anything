@@ -5,6 +5,8 @@ All tests use synthetic data — no real Calibre installation required.
 
 import json
 import os
+import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -612,6 +614,60 @@ class TestCLIHelp(unittest.TestCase):
             result.exit_code != 0 or "library" in result.output.lower() or
             "library" in (result.output + (result.stderr or "")).lower()
         )
+
+
+class TestCLISubprocessSmoke(unittest.TestCase):
+    """Subprocess smoke tests that do not require Calibre to be installed."""
+
+    @staticmethod
+    def _resolve_cli():
+        force = os.environ.get("CLI_ANYTHING_FORCE_INSTALLED", "").strip() == "1"
+        installed = shutil.which("cli-anything-calibre")
+        if installed:
+            return [installed]
+        if force:
+            raise RuntimeError(
+                "cli-anything-calibre not found in PATH. Install with: pip install -e ."
+            )
+        return [sys.executable, "-m", "cli_anything.calibre"]
+
+    def _run(self, args, *, home=None):
+        env = os.environ.copy()
+        harness_root = Path(__file__).resolve().parents[3]
+        env["PYTHONPATH"] = (
+            str(harness_root)
+            if not env.get("PYTHONPATH")
+            else f"{harness_root}{os.pathsep}{env['PYTHONPATH']}"
+        )
+        env.pop("CALIBRE_LIBRARY", None)
+        if home:
+            env["HOME"] = home
+        return subprocess.run(
+            self._resolve_cli() + args,
+            capture_output=True,
+            text=True,
+            env=env,
+            check=False,
+        )
+
+    def test_installed_or_module_help_smoke(self):
+        result = self._run(["--help"])
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("Usage:", result.stdout)
+        self.assertIn("library", result.stdout)
+
+    def test_installed_or_module_version_smoke(self):
+        result = self._run(["--version"])
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("cli-anything-calibre", result.stdout)
+
+    def test_missing_library_error_without_calibre(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            result = self._run(["books", "list"], home=tmp)
+        combined = result.stdout + result.stderr
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("No Calibre library connected", combined)
+        self.assertIn("CALIBRE_LIBRARY", combined)
 
 
 if __name__ == "__main__":

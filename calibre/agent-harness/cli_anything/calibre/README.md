@@ -177,12 +177,38 @@ Override with the `CALIBRE_LIBRARY` environment variable.
 ```bash
 cd agent-harness
 
-# Unit tests (no Calibre required)
-pytest cli_anything/calibre/tests/test_core.py -v
+# Syntax check
+python -m py_compile \
+  cli_anything/calibre/calibre_cli.py \
+  cli_anything/calibre/core/*.py \
+  cli_anything/calibre/utils/*.py
+
+# Unit and CLI smoke tests (no Calibre required)
+python -m pytest cli_anything/calibre/tests/test_core.py -v
+
+# Installed-command smoke tests (no Calibre required)
+pip install -e .
+CLI_ANYTHING_FORCE_INSTALLED=1 python -m pytest \
+  cli_anything/calibre/tests/test_core.py::TestCLISubprocessSmoke -v
 
 # Full E2E tests (Calibre required)
-pytest cli_anything/calibre/tests/test_full_e2e.py -v -s
+python -m pytest cli_anything/calibre/tests/test_full_e2e.py -v -s
 
-# All tests with installed binary
-CLI_ANYTHING_FORCE_INSTALLED=1 pytest cli_anything/calibre/tests/ -v -s
+# All tests with installed binary and real Calibre backend
+CLI_ANYTHING_FORCE_INSTALLED=1 python -m pytest cli_anything/calibre/tests/ -v -s
 ```
+
+### Real Backend Validation
+
+Before running E2E validation, verify Calibre's commands are on PATH:
+
+```bash
+which calibredb
+which ebook-convert
+which ebook-meta
+```
+
+The E2E suite creates temporary Calibre libraries, imports generated EPUB files,
+updates metadata with `calibredb`, converts EPUB files with `ebook-convert`, and
+checks exported/converted artifacts for real output files. These tests require a
+real Calibre installation; `test_core.py` remains the no-Calibre validation path.

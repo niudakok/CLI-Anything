@@ -5,7 +5,13 @@
 This document covers the test plan and results for `cli-anything-calibre`, a CLI harness
 wrapping the real Calibre tools (`calibredb`, `ebook-convert`, `ebook-meta`).
 
-**Hard dependency:** Calibre must be installed (`calibredb` in PATH).
+**Unit/smoke dependency:** `test_core.py` does not require Calibre. It includes
+subprocess smoke checks for help, version, and missing-library behavior using the
+installed `cli-anything-calibre` command when available, or `python -m
+cli_anything.calibre` as a development fallback.
+
+**E2E hard dependency:** `test_full_e2e.py` requires Calibre (`calibredb`,
+`ebook-convert`, and `ebook-meta` in PATH) for real backend validation.
 
 ---
 
@@ -13,8 +19,8 @@ wrapping the real Calibre tools (`calibredb`, `ebook-convert`, `ebook-meta`).
 
 | File | Tests Planned | Description |
 |------|--------------|-------------|
-| `test_core.py` | 38 | Unit tests: synthetic data, no external deps, no Calibre needed |
-| `test_full_e2e.py` | 20 | E2E tests: real Calibre library operations + subprocess CLI tests |
+| `test_core.py` | 41 | Unit tests: synthetic data, no external deps, no Calibre needed, plus subprocess smoke |
+| `test_full_e2e.py` | 21 | E2E tests: real Calibre library operations + subprocess CLI tests |
 
 ---
 
@@ -72,13 +78,36 @@ wrapping the real Calibre tools (`calibredb`, `ebook-convert`, `ebook-meta`).
 | `test_find_ebook_meta_missing` | find_ebook_meta() raises RuntimeError if not in PATH |
 | `test_error_message_contains_install_hint` | Error messages include install instructions |
 
-### `calibre_cli.py` — 3 tests
+### `calibre_cli.py` — 6 tests
 
 | Test | Description |
 |------|-------------|
 | `test_cli_help_exits_zero` | `--help` prints usage and returns 0 |
 | `test_cli_version` | `--version` returns version string |
 | `test_cli_missing_library_error` | Commands without library set print clear error |
+| `test_installed_or_module_help_smoke` | Subprocess `--help` smoke test; uses installed entry point if present |
+| `test_installed_or_module_version_smoke` | Subprocess `--version` smoke test; uses installed entry point if present |
+| `test_missing_library_error_without_calibre` | Subprocess missing-library error works without Calibre installed |
+
+Run no-backend validation:
+
+```bash
+cd calibre/agent-harness
+python -m py_compile \
+  cli_anything/calibre/calibre_cli.py \
+  cli_anything/calibre/core/*.py \
+  cli_anything/calibre/utils/*.py
+python -m pytest cli_anything/calibre/tests/test_core.py -v
+```
+
+Installed-command smoke mode:
+
+```bash
+cd calibre/agent-harness
+pip install -e .
+CLI_ANYTHING_FORCE_INSTALLED=1 python -m pytest \
+  cli_anything/calibre/tests/test_core.py::TestCLISubprocessSmoke -v
+```
 
 ---
 
@@ -91,14 +120,15 @@ These tests invoke the **real Calibre** tools and verify the output.
 E2E tests use a temporary Calibre library created with `calibredb add` from a real EPUB.
 A minimal EPUB is generated programmatically (valid ZIP structure) for reproducibility.
 
-### `TestLibraryOperations` — 5 tests
+### `TestLibraryOperations` — 6 tests
 
 | Test | Description | Verified |
 |------|-------------|---------|
-| `test_create_library_and_add_epub` | Add EPUB to new library | Book ID returned, book count > 0 |
+| fixture setup | Add EPUB to new library | Book ID returned, book count > 0 |
 | `test_list_books` | list_books() returns book entries | ID, title, authors present |
+| `test_list_books_custom_fields` | list_books() honors explicit field list | Requested fields present, omitted fields absent |
 | `test_search_books` | search_books() with query | Returns matching IDs |
-| `test_show_metadata` | get_metadata() returns parsed OPF | title, authors fields present |
+| `test_get_metadata` | get_metadata() returns parsed OPF | title, authors fields present |
 | `test_export_books` | export_books() exports to directory | Files exported, cover.jpg present |
 
 ### `TestMetadataOperations` — 3 tests
@@ -182,7 +212,39 @@ Tests the installed `cli-anything-calibre` command directly via subprocess.
 
 ## Test Results
 
-Run command:
+No-backend validation run:
+
+```bash
+cd calibre/agent-harness
+python -m py_compile \
+  cli_anything/calibre/calibre_cli.py \
+  cli_anything/calibre/core/*.py \
+  cli_anything/calibre/utils/*.py
+python -m pytest cli_anything/calibre/tests/test_core.py -v
+```
+
+Current no-backend result:
+
+```text
+41 passed in 0.74s
+```
+
+Installed-command smoke run:
+
+```bash
+cd calibre/agent-harness
+pip install -e .
+CLI_ANYTHING_FORCE_INSTALLED=1 python -m pytest \
+  cli_anything/calibre/tests/test_core.py::TestCLISubprocessSmoke -v
+```
+
+Current installed-command smoke result:
+
+```text
+3 passed in 0.63s
+```
+
+Historical real-backend run:
 ```bash
 CLI_ANYTHING_FORCE_INSTALLED=1 python -m pytest cli_anything/calibre/tests/ -v --tb=no
 ```
@@ -250,13 +312,37 @@ cli_anything/calibre/tests/test_full_e2e.py::TestCLISubprocess::test_version PAS
 
 | Metric | Value |
 |--------|-------|
-| Total tests | 50 |
-| Passed | 50 |
+| Total tests expected now | 62 |
+| No-backend tests passed in current run | 41 |
+| Installed smoke tests passed in current run | 3 |
+| Historical full-suite tests passed | 50 |
 | Failed | 0 |
-| Pass rate | 100% |
-| Execution time | 15.93s |
+| Current no-backend execution time | 0.74s |
+| Current installed-smoke execution time | 0.63s |
+| Historical full-suite execution time | 15.93s |
 | Calibre version | 7.6 |
 | Subprocess backend | `/home/orgleaf/py-base-venv/bin/cli-anything-calibre` (installed) |
+
+## Real Backend Validation Steps
+
+Use these steps to validate the harness against a real Calibre install:
+
+```bash
+cd calibre/agent-harness
+pip install -e .
+which calibredb
+which ebook-convert
+which ebook-meta
+CLI_ANYTHING_FORCE_INSTALLED=1 python -m pytest \
+  cli_anything/calibre/tests/test_full_e2e.py -v -s
+```
+
+Expected behavior:
+
+- Tests create temporary Calibre libraries and seed them with generated EPUB files.
+- `calibredb` is used for add/list/search/metadata/export operations.
+- `ebook-convert` is used for EPUB to TXT/MOBI conversion and output files are checked for existence and nonzero size.
+- Subprocess E2E tests require the installed `cli-anything-calibre` entry point when `CLI_ANYTHING_FORCE_INSTALLED=1` is set.
 
 ## Coverage Notes
 
