@@ -61,12 +61,29 @@ async function buildSketchFile(sketch, outputPath) {
 
 function loadTokens(specTokensPath, cliTokensPath, specDir) {
   const defaultTokensPath = path.resolve(__dirname, '..', 'tokens', 'default.json');
+  const tokensDir = path.resolve(__dirname, '..', 'tokens');
   let tokensPath = defaultTokensPath;
 
+  const isSafePath = (p, base) => {
+    const relative = path.relative(base, p);
+    return relative && !relative.startsWith('..') && !path.isAbsolute(relative);
+  };
+
   if (cliTokensPath) {
-    tokensPath = path.resolve(cliTokensPath);
+    const resolved = path.resolve(cliTokensPath);
+    // Allow if in tokens dir or local to specDir
+    if (isSafePath(resolved, tokensDir) || (specDir && isSafePath(resolved, path.resolve(specDir)))) {
+      tokensPath = resolved;
+    } else {
+      console.warn(`Unsafe tokens path ignored: ${cliTokensPath}`);
+    }
   } else if (specTokensPath) {
-    tokensPath = path.resolve(specDir, specTokensPath);
+    const resolved = path.resolve(specDir, specTokensPath);
+    if (isSafePath(resolved, path.resolve(specDir))) {
+      tokensPath = resolved;
+    } else {
+      console.warn(`Unsafe spec tokens path ignored: ${specTokensPath}`);
+    }
   }
 
   if (!fs.existsSync(tokensPath)) {
