@@ -1,5 +1,9 @@
 <h1 align="center"><img src="assets/icon.png" alt="" width="64" style="vertical-align: middle;">&nbsp; CLI-Anything: Jede Software Agent-Native machen</h1>
 
+<div align="center">
+<a href="https://trendshift.io/repositories/22991" target="_blank"><img src="https://trendshift.io/api/badge/repositories/22991" alt="HKUDS%2FCLI-Anything | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+</div>
+
 <p align="center">
   <strong>Die Software von heute ist für Menschen👨‍💻. Die Nutzer von morgen sind Agenten🤖.<br>
 CLI-Anything: Die Brücke zwischen KI-Agenten und der Software der Welt</strong><br>
@@ -9,8 +13,8 @@ CLI-Anything: Die Brücke zwischen KI-Agenten und der Software der Welt</strong>
 
 <p align="center">
   <a href="#-schnellstart"><img src="https://img.shields.io/badge/Quick_Start-5_min-blue?style=for-the-badge" alt="Schnellstart"></a>
-  <a href="#-demonstrationen"><img src="https://img.shields.io/badge/Demos-12_Apps-green?style=for-the-badge" alt="Demos"></a>
-  <a href="#-testergebnisse"><img src="https://img.shields.io/badge/Tests-1%2C540_Passing-brightgreen?style=for-the-badge" alt="Tests"></a>
+  <a href="#-demonstrationen"><img src="https://img.shields.io/badge/Demos-18_Apps-green?style=for-the-badge" alt="Demos"></a>
+  <a href="#-testergebnisse"><img src="https://img.shields.io/badge/Tests-2%2C269_Passing-brightgreen?style=for-the-badge" alt="Tests"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-yellow?style=for-the-badge" alt="Lizenz"></a>
 </p>
 
@@ -33,6 +37,112 @@ CLI-Anything: Die Brücke zwischen KI-Agenten und der Software der Welt</strong>
 <p align="center">
   <img src="assets/teaser.png" alt="CLI-Anything Teaser" width="800">
 </p>
+
+---
+
+## 📰 Neuigkeiten
+
+> Danke an die Community für die unschätzbaren Beiträge! Täglich kommen weitere Updates dazu.
+
+- **2026-05-20** 🎛️ **Rekordbox CLI** gemerged (#252) mit abgesicherten SQLCipher-Schreibpfaden, Backup-Pflicht bei erzwungenen Schreibvorgängen, Smoke-Coverage und Root-Skill-Sync. 📚 **Calibre CLI** gemerged (#223) mit Library-/Suche-/Metadaten-/Konvertierungs-/Export-Workflows, 41 Unit-Tests, echtem Calibre-E2E-Nachweis und Root-Skill-Validierung. 🧊 **3MF CLI** gemerged (#209) mit Mesh-Inspektion, Hole-Resizing, Reparatur, Vergleich und erhaltenen Triangle-Attributen. 🎙️ **MiniMax CLI** gemerged (#189) mit Chat-/TTS-Workflows, JSON-sicherem Modell-/Voice-Listing, REPL-Quote-Handling und Smoke-/E2E-Coverage. 🎮 **UEAtelier** in der Registry aufgenommen (#297) als Unreal-Editor-MCP-Self-Extension-Workbench mit Python-CLI-Proxy.
+
+- **2026-05-19** 🛠️ Bestehende Harnesses haben einen Quality-/Security-Pass bekommen — **Zoom** lädt Recordings über direkte URLs herunter (#294), **Obsidian**-Suche nutzt jetzt die Vendor-Content-Types der Local REST API (#289), **LibreOffice** Headless-Konvertierung läuft robuster auf macOS (#290), und XML-/SVG-/ODF-/MLT-/MusicXML-/CSL-Parsing routet untrusted Input nun durch `defusedxml` (#296).
+
+- **2026-05-18** 📈 README-Präsentation aufgefrischt mit dem Trendshift-Badge und zentriertem Projekt-Header-Feinschliff (#285, #286); der Landing-Bereich bleibt auf Discovery und Projektdynamik fokussiert.
+
+- **2026-05-17** 🌐 **CLI-Hub**-Registry-Handling wurde gehärtet (#281) — Registry-Einträge werden jetzt vor dem `_source`-Tagging kopiert, damit gecachte oder gemockte Registry-Daten nicht mehr in-place mutiert werden.
+
+- **2026-05-16** 🔧 **n8n** hat den REPL-Banner-Crash-Fix bekommen, der später nach main gemerged wurde (#280), womit der Start-Pfad ohne Subcommand interaktiv wieder funktioniert — inklusive Regression-Coverage.
+
+<details>
+<summary>Frühere Neuigkeiten (10.–18. April)</summary>
+
+- **2026-04-18** 🧩 **Alle SKILL.md-Dateien werden jetzt unter dem Top-Level-Verzeichnis `skills/` vereinheitlicht** — jeder CLI-Skill lässt sich aus einer einzigen kanonischen Quelle installieren via `npx skills add HKUDS/CLI-Anything --skill <skill-name> -g -y`. Außerdem haben wir Root-Skill-Validierungs-CI ergänzt, Contribution-/PR-Docs sowie REPL-Skill-Path-Hinweise auf das neue Layout angepasst und das **CLI-Hub**-Install-First-Frontend rund um den neuen `npx skills`-Flow überarbeitet.
+
+- **2026-04-17** 🌐 **CLI-Hub** hat einen weiteren Install-UX-Pass bekommen — öffentliche Registry-Metadaten und Skill-Coverage wurden geschärft, das Visit-Counting korrigiert und das Web-Hub weiter verfeinert. 🧪 **Shotcut**-Render-Output-Dauer wurde gefixt (#92). 📝 **SKILL**-Contribution-Pfade wurden für den neuen Docs-Flow korrigiert (#224), und der Skill-Generator behandelt leere Intros jetzt sicher (#203).
+
+- **2026-04-16** 🗺️ **QGIS CLI** gemerged (#207) — ein vollständiges GIS-/Map-Authoring-Harness ist gelandet. 🧬 **UniMol Tools CLI** gemerged (#219) für Molekül-Modelling-Workflows. 🌐 **CLI-Hub** hat zudem weitere öffentliche CLIs aufgenommen, darunter **py4csr**, seinen generierten Meta-Skill aufgefrischt, SKILL-Contribution-Docs korrigiert und die `apt-get`-Paket-Extraktion in der Skill-Generierung gefixt (#204).
+
+- **2026-04-16** 📈 **Unreal Insights CLI** ausgebaut — Background-Capture-Session-Steuerung ergänzt (`capture start/status/snapshot/stop`), Engine-Root-passende `UnrealInsights.exe`-Resolution-/Build-Flows hinzugefügt und Docs/Tests für den neuen Orchestrierungs-Workflow überarbeitet.
+
+- **2026-04-15** 🌐 **CLI-Hub** auf **v0.2.0** aktualisiert — das PyPI-Paket unterstützt jetzt öffentliche CLIs aus mehreren Install-Quellen (`pip`, `npm`, `brew`, gebündelte/Systemtools), gestützt auf eine neue `public_registry.json`. Das Hub-Frontend wurde mit getrennten Decks für **CLI-Anything CLIs** und **Public CLIs** neu gestaltet, und Live-End-to-End-Checks decken jetzt echte Install-, Update- und Uninstall-Flows über pip- und npm-Pakete hinweg ab.
+
+- **2026-04-14** 🧭 **Safari CLI** gemerged (#212) und in die Hub-Registry aufgenommen — Browser-Automation via `safari-mcp`. 🎬 **Kdenlive** hat zudem Kompatibilitäts-Fixes für Gen-5-Project-Output und ungültige Projekt-Generierung bekommen.
+
+- **2026-04-13** 📓 **Obsidian CLI** gemerged (#211) — Knowledge-Management-Harness via Local REST API mit 48 Unit-Tests und 7 E2E-Tests. ⛓️ **Eth2-Quickstart CLI** gemerged (#195) — Ethereum-Staking-Node-Management-Harness. 📚 **Zotero CLI** auf v0.4.1 aktualisiert (#201) — wird jetzt aus seinem Standalone-Repo geliefert, und CLI-Hub unterstützt jetzt remote `skill_md`-URLs.
+
+- **2026-04-11** 🔗 **n8n CLI** gemerged (#188) — Workflow-Automation-Harness für selbst gehostete Automation-Flows. 🔧 **Exa CLI**-Fix (#205) ergänzt den `x-exa-integration`-Header für Usage-Tracking. 📦 **CLI-Hub** hat zudem seinen PyPI-Auto-Publish-Workflow und eine Package-Refresh-Pipeline bekommen.
+
+- **2026-04-10** 📦 **CLI-Hub Package Manager** gelauncht — `pip install cli-anything-hub`, um CLI-Anything-Harnesses aus einem Befehl heraus zu browsen, zu suchen, zu installieren, zu aktualisieren und zu deinstallieren. Das Web-Hub hat zudem seinen ersten Install-fokussierten Frontend-Refresh und die „Empower yourself"-Toolkit-Karte bekommen.
+
+</details>
+
+<details>
+<summary>Frühere Neuigkeiten (1.–9. April)</summary>
+
+- **2026-04-09** 🧹 Cleanup- und Docs-Pass (#200) — Openscreen-Test-Zwischensummen gefixt, Openscreen ins chinesische README und die Projektstruktur aufgenommen und die `/cli-anything`-Befehlssyntax in den Docs klargestellt.
+
+- **2026-04-08** 🎬 **Openscreen CLI** gemerged (#183) — Screen-Recording-Editor-Harness mit 101 Tests. ☁️ **CloudAnalyzer CLI** gemerged (#181) — Cloud-Cost-Analysis-Harness mit 27 Befehlen. 🌊 **SeaClip / PM2 / ChromaDB**-Harnesses gemerged (#129).
+
+- **2026-04-07** 🔄 **Dify Workflow CLI** gemerged (#191) — Workflow-Automation-Wrapper. 🔧 **Inkscape** Auto-Save-Fix (#193, behebt #182). 🛡️ **DomShell-Security-Hardening** (#156) — URL-Validierung und DOM-Sanitization für das Browser-CLI. 🥧 **Pi Coding Agent**-Extension gemerged (#178).
+
+- **2026-04-06** 🔍 **Exa CLI** gemerged (#172) — KI-gestütztes Web-Search-und-Answers-Harness. 🎮 **Godot CLI** gemerged (#140) — Game-Engine-Harness mit voller Demo-Game-E2E-Pipeline. ☁️ **CloudAnalyzer** Review-Fixes und Frontend-Verbesserungen sind ebenfalls gelandet.
+
+- **2026-04-03** 🧪 **WireMock CLI** gemerged (#170) — HTTP-Mock-Server-Harness für API-Tests. 🥧 **Pi Coding Agent**-Extension-Support ist ebenfalls gelandet, und CLI-Demo-Aufzeichnungen wurden den Docs hinzugefügt.
+
+- **2026-04-01** ⚔️ **Slay the Spire II CLI** gemerged (#148) — Deck-Building-Roguelike-Harness. 🎥 **VideoCaptioner CLI** gemerged (#166) — KI-gestütztes Video-Captioning-Harness. 🛰️ **IntelWatch** wurde der Registry für B2B-OSINT-Workflows hinzugefügt.
+
+</details>
+
+<details>
+<summary>Frühere Neuigkeiten (23.–30. März)</summary>
+
+- **2026-03-30** 🏗️ **CLI-Anything v0.2.0** — HARNESS.md Progressive-Disclosure-Redesign. Detaillierte Guides nach `guides/` ausgelagert für On-Demand-Loading. Phasen 1–7 sind jetzt durchgehend. Key Principles und Rules in einem einzigen autoritativen Abschnitt zusammengeführt.
+
+- **2026-03-29** 📐 Blender-Skill-Docs aktualisiert — absolute Render-Pfade werden erzwungen und Voraussetzungen korrigiert.
+
+- **2026-03-28** 🌐 **CLIBrowser** in die CLI-Hub-Registry aufgenommen für agent-zugängliche Browser-Automation.
+
+- **2026-03-27** 📚 Zotero-SKILL.md mit Agent-orientierten Constraints erweitert; REPL-Config- und Executable-Resolution-Fixes.
+
+- **2026-03-26** 📖 **Zotero CLI**-Harness für Zotero Desktop gelandet (Library-Management, Sammlungen, Zitationen). Draw.io Custom-ID-Bugfix (#132) und registry.json-Syntax-Fix.
+
+- **2026-03-25** 🎮 **RenderDoc CLI** gemerged für GPU-Frame-Capture-Analyse. FreeCAD für v1.1 aktualisiert. Blender EEVEE-Engine-Name korrigiert. Zoom-Token-Permissions gehärtet.
+
+- **2026-03-24** 🏭 **FreeCAD CLI** ergänzt mit 258 Befehlen über 17 Gruppen. **iTerm2**- und **Teltonika RMS**-Harnesses in die Registry aufgenommen.
+
+- **2026-03-23** 🤖 **CLI-Hub Meta-Skill** gelauncht — Agenten können CLIs jetzt autonom entdecken und installieren. **Krita CLI**-Harness gemerged für Digital Painting.
+
+</details>
+
+<details>
+<summary>Frühere Neuigkeiten (11.–22. März)</summary>
+
+- **2026-03-22** 🎵 **MuseScore CLI** gemerged mit Transponieren, Export und Instrument-Management.
+
+- **2026-03-21** 🔧 Infrastruktur-Verbesserungen — Test-Harnesses und Dokumentation über mehrere CLIs hinweg überarbeitet. Erweiterte Windows-Kompatibilität für mehrere Backends.
+
+- **2026-03-20** 🌐 **Novita AI** CLI ergänzt für OpenAI-kompatiblen API-Zugang. Registry-Metadaten-Verbesserungen für bessere Hub-Discovery.
+
+- **2026-03-19** 📦 Verfeinerungen der Paketstruktur über die Harnesses hinweg. Verbesserte SKILL.md-Generierung mit besserer Befehlsdokumentation.
+
+- **2026-03-18** 🧪 Erweiterung der Test-Coverage — zusätzliche E2E-Szenarien und Edge-Case-Validierung über mehrere CLIs hinweg.
+
+- **2026-03-17** 🌐 Den **[CLI-Hub](https://hkuds.github.io/CLI-Anything/)** gelauncht — eine zentrale Registry, in der jedes CLI mit einem einzigen `pip`-Befehl gebrowst, gesucht und installiert werden kann.
+
+- **2026-03-16** 🤖 **SKILL.md-Generierung** ergänzt (Phase 6.5) — jedes generierte CLI bringt jetzt eine KI-entdeckbare Skill-Definition mit.
+
+- **2026-03-15** 🐾 Support für **OpenClaw** aus der Community! Windows-`cygpath`-Guard für plattformübergreifenden Support gemerged.
+
+- **2026-03-14** 🔒 Eine GIMP Script-Fu-Path-Injection-Vulnerability gefixt und die **japanische README**-Übersetzung ergänzt.
+
+- **2026-03-13** 🔌 **Qodercli**-Plugin offiziell als Community-Beitrag gemerged inkl. dedizierter Setup-Skripte.
+
+- **2026-03-12** 📦 **Codex-Skill**-Integration gelandet — CLI-Anything erreicht damit eine weitere KI-Coding-Plattform.
+
+- **2026-03-11** 📞 **Zoom**-Videokonferenz-Harness als 11. unterstützte Anwendung hinzugefügt.
+
+</details>
 
 ---
 
@@ -60,7 +170,7 @@ Die Kommandozeile ist die universelle Schnittstelle — gleichermaßen für Mens
 - Die Zielsoftware muss installiert sein (z. B. GIMP, Blender, LibreOffice oder deine eigene Anwendung)
 - Unterstützte KI-Coding-Agenten: [Claude Code](#-claude-code) | [OpenClaw](#-openclaw) | [OpenCode](#-opencode) | [Codex](#-codex) | [Qodercli](#-qodercli) | [GitHub Copilot CLI](#-github-copilot-cli) | [Weitere Plattformen](#-weitere-plattformen-bald)
 
-### Wähle deine Plattform
+### Wähle deine Agent-Plattform
 
 <details open>
 <summary><h4 id="-claude-code">⚡ Claude Code</h4></summary>
@@ -327,6 +437,26 @@ cli-anything-gimp
 
 ---
 
+## 🤖 Stärke deine Agenten mit CLI-Hub
+
+CLI-Hub lässt Agenten autonom die CLIs entdecken, installieren und nutzen, die sie für eine Aufgabe brauchen.
+
+```bash
+npx skills add HKUDS/CLI-Anything --skill cli-hub-meta-skill -g -y
+```
+
+**Ebenfalls verfügbar auf:** [ClawHub](https://clawhub.ai/yuh-yang/cli-anything-hub), [SkillHub](https://www.skillhub.club/web/skills/itsyuhao-cli-anything-hub), [SkillHub.cn](https://skillhub.cn/skills/cli-hub-meta-skill)
+
+Dann prompten:
+
+```text
+Finde passende CLI-Software im CLI-Hub und erledige die Aufgabe: ...
+```
+
+Der Meta-Skill verweist Agenten auf den Live-Katalog von CLI-Hub, wo sie ein CLI auswählen, es installieren und seine eigene `SKILL.md` für die aufgabenspezifische Nutzung lesen können.
+
+---
+
 ## 💡 Die Vision von CLI-Anything: Agent-Native Software bauen
 
 • 🌐 **Universeller Zugang** — jede Software wird über strukturierte CLIs sofort agent-steuerbar.
@@ -447,6 +577,104 @@ Alle CLIs leben im `cli_anything.*`-Namespace — kein Konflikt, pip-installierb
 </td>
 </tr>
 </table>
+
+### 🤖 SKILL.md-Generierung
+
+Jedes generierte CLI hat jetzt eine kanonische `SKILL.md` unter `skills/cli-anything-<software>/SKILL.md`. Damit wird das aktuelle Monorepo direkt von `npx skills` konsumierbar, während eine paketierte Kompatibilitätskopie unter `cli_anything/<software>/skills/SKILL.md` das Verhalten installierter Harnesses bewahrt.
+
+**Was SKILL.md bereitstellt:**
+- **YAML-Frontmatter** mit Name und Beschreibung für die Agent-Skill-Discovery
+- **Befehlsgruppen** mit allen verfügbaren Subcommands dokumentiert
+- **Nutzungsbeispiele** für gängige Workflows
+- **Agent-spezifische Hinweise** für JSON-Output, Fehlerbehandlung und programmatische Nutzung
+
+SKILL.md-Dateien werden während Phase 6.5 der Pipeline automatisch über `skill_generator.py` erzeugt, der die Metadaten direkt aus den Click-Decoratoren des CLIs, aus `setup.py` und aus dem README extrahiert. Der Generator schreibt jetzt die kanonische Repo-Root-Skill-Datei und frischt die paket-lokale Kompatibilitätskopie auf, die installierte Harnesses nutzen. Innerhalb dieses Repos verweist das REPL-Banner Agenten auf den kanonischen Root-Skill-Pfad; nach `pip install` fällt es auf die paketierte Kopie zurück.
+
+---
+
+## 🎬 Demos aus der Praxis
+
+KI-Agenten nutzen generierte CLIs, um vollständige, brauchbare Artefakte zu produzieren — ganz ohne GUI.
+
+### FreeCAD &mdash; Curiosity Rover via Preview, Live Preview und Trajektorie
+
+> **Harness:** `cli-anything-freecad` | **Preview-Stack:** `preview` + `preview live` + `trajectory.json` | **Artefakt:** Agent-gebauter Curiosity-artiger Rover
+
+Ein Agent baut Schritt für Schritt einen Curiosity-inspirierten Rover auf und veröffentlicht dabei echte FreeCAD-Preview-Bundles, frischt eine Live-Preview-Session auf und protokolliert die Command-zu-Preview-Historie für späteres Replay. Das resultierende Demo zeigt, wie das Artefakt vor dem finalen Showcase Stück für Stück wächst.
+
+<p align="center">
+  <img src="assets/demos/freecad-curiosity-preview-trajectory.gif" alt="FreeCAD Curiosity Rover Demo angetrieben von Preview, Live Preview und Trajektorien-Historie" width="860" />
+</p>
+
+<p align="center">
+  <sub>Das README-GIF wurde aus dem vollständigen lokalen Demo-Video über einen Speed-angepassten, qualitätshohen ffmpeg-Palette-Workflow erzeugt.</sub>
+</p>
+
+### Blender &mdash; Orbital Relay Drone via Preview, Live Preview und Trajektorie
+
+> **Harness:** `cli-anything-blender` | **Preview-Stack:** `preview` + `preview live` + `trajectory.json` | **Artefakt:** Agent-gebaute Orbital-Relay-Drohne
+
+Ein Agent nutzt das Blender-Harness, um in einem echten Preview-Loop eine Hard-Surface-Orbital-Relay-Drohne wachsen zu lassen: jede Stufe pusht neue render-gestützte Bundles, die Live-Session verfolgt den aktuellen Head, und die Trajektorie verknüpft jedes Kommando mit dem passenden visuellen Stand. Das Demo endet mit der fertigen Szene, bereit für eine polierte Turntable-Aufnahme.
+
+<p align="center">
+  <img src="assets/demos/blender-orbital-relay-drone-preview-trajectory.gif" alt="Blender Orbital-Relay-Drohne Demo angetrieben von Preview, Live Preview und Trajektorien-Historie" width="860" />
+</p>
+
+<p align="center">
+  <sub>Das README-GIF wurde aus dem vollständigen lokalen Demo-Video über einen Speed-angepassten, qualitätshohen ffmpeg-Palette-Workflow erzeugt.</sub>
+</p>
+
+### Draw.io &mdash; HTTPS-Handshake-Diagramm
+
+> **Harness:** `cli-anything-drawio` | **Zeit:** ~4 Min. | **Artefakt:** `.drawio` + `.png`
+
+Ein Agent erstellt von Grund auf ein vollständiges Diagramm zum Lebenszyklus einer HTTPS-Verbindung — TCP-Three-Way-Handshake, TLS-Aushandlung, verschlüsselter Datenaustausch und TCP-Four-Way-Termination — ausschließlich über CLI-Befehle.
+
+<p align="center">
+  <img src="assets/demos/drawio-demo.gif" alt="Draw.io-CLI-Demo: Aufbau eines HTTPS-Handshake-Diagramms" width="720" />
+</p>
+
+<details>
+<summary>Finales Artefakt</summary>
+<p align="center">
+  <img src="assets/demos/drawio-https-handshake.png" alt="HTTPS-Handshake-Sequenzdiagramm" width="600" />
+</p>
+</details>
+
+*Beigesteuert von [@zhangxilong-43](https://github.com/zhangxilong-43)*
+
+### Slay the Spire II &mdash; Game-Automatisierung
+
+> **Harness:** `cli-anything-slay-the-spire-ii` | **Artefakt:** Automatisierte Spielsession
+
+Ein Agent spielt über das CLI-Harness einen kompletten Slay-the-Spire-II-Run durch — liest den Spielzustand, wählt Karten, wählt Pfade und trifft strategische Entscheidungen in Echtzeit.
+
+<p align="center">
+  <img src="assets/demos/slay-the-spire-ii-gameplay.gif" alt="Slay the Spire II CLI-Gameplay-Demo" width="720" />
+</p>
+
+*Beigesteuert von [@TianyuFan0504](https://github.com/TianyuFan0504)*
+
+### VideoCaptioner &mdash; automatisch generierte Untertitel
+
+> **Harness:** `cli-anything-videocaptioner` | **Artefakt:** Untertitelte Videoframes
+
+Ein Agent nutzt das VideoCaptioner-CLI, um automatisch gestaltete Untertitel zu generieren und in Videoinhalte einzublenden — inklusive zweisprachiger Text-Wiedergabe und individueller Formatierung.
+
+<table align="center">
+<tr>
+<td align="center"><strong>Sub A</strong></td>
+<td align="center"><strong>Sub B</strong></td>
+</tr>
+<tr>
+<td><img src="assets/demos/videocaptioner-before.png" alt="Videoframe vor dem Captioning" width="380" /></td>
+<td><img src="assets/demos/videocaptioner-after.png" alt="Videoframe nach dem Captioning" width="380" /></td>
+</tr>
+</table>
+
+*Beigesteuert von [@WEIFENG2333](https://github.com/WEIFENG2333)*
+
+*Weitere CLI-Demos folgen in Kürze.*
 
 ---
 
@@ -770,6 +998,24 @@ Das Playbook bündelt die zentralen Erkenntnisse aus dem Bau von 11 unterschiedl
 ---
 
 ## 📦 Installation & Nutzung
+
+### Für CLI-Hub-Nutzer
+
+```bash
+# Package Manager installieren
+pip install cli-anything-hub
+
+# CLIs browsen, suchen, inspizieren und installieren
+cli-hub list
+cli-hub search <query>
+cli-hub info <name>
+cli-hub install <name>
+
+# Installierte CLIs verwalten
+cli-hub update <name>
+cli-hub uninstall <name>
+cli-hub launch <name> [args...]
+```
 
 ### Für Plugin-Nutzer (Claude Code)
 
